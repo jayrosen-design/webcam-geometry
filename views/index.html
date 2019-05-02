@@ -1,0 +1,120 @@
+<head>
+  <title>a-frame webcam component with custom geometry </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+  
+  <script src="https://rawgit.com/aframevr/aframe/56c390f/dist/aframe-master.min.js"></script>
+  
+  <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+  
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  
+  <script src="geometries/curved-plane.js"></script>
+  
+  <script src="components/a-webcam.js"></script>
+  
+  <link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+  <a-scene keyboard-shortcuts antialias="true" fog="type: exponential; color: #000; density: .15">
+    <!-- ASSETS -->
+    <a-assets>
+      <video id="element" src width="1024" height="1024" autoplay="true" webkit-playsinline crossorigin="anonymous"> </video>
+    </a-assets>
+
+      
+      <a-entity>
+          <a-animation 
+                       easing="linear" 
+                       attribute="rotation" 
+                       dur="15000"
+                      to="0 360 0"
+                       repeat="indefinite">
+        </a-animation>
+        
+        <a-video id="screen-1" 
+                        material="src:#element; shader: standard;"
+                        geometry="primitive: octahedron; segmentsHeight: 16; segmentsWidth: 16"
+                        a-webcam
+                        position="0 0 0" 
+                        rotation="-10 0 0"
+                        width="4" height="3">
+        </a-video> 
+
+ <a-entity>
+          <a-animation 
+                       easing="linear" 
+                       attribute="rotation" 
+                       dur="15000"
+                      to="0 360 0"
+                       repeat="indefinite">
+        </a-animation>
+          <a-video id="screen-2" material=" 
+                                 opacity: .8 ; 
+                                 metalness:1; 
+                                 roughness: 0.1; 
+                               
+                                src:#element;" geometry="primitive:octahedron;width:4;height:3;segmentsHeight:16;segmentsWidth:16" a-webcam="" position="0 2.915 0" rotation="-10 0 0" width="4" height="3" scale="1 1 1" visible="true">
+       </a-video>
+            </a-entity>
+        
+        <a-video id="screen-6" material="color:#FFF;shader:standard;side:double;transparent:true;src:#element" geometry="primitive:octahedron;width:4;height:3;segmentsHeight:16;segmentsWidth:16" a-webcam="" position="0 5.589 0" rotation="-10 0 0" width="4" height="3" scale="1 1 1" visible="true">
+        </a-video>
+        
+        <a-video id="screen-4" material="color:#FFF;shader:standard;side:double;transparent:true;src:#element" geometry="primitive:octahedron;width:4;height:3;segmentsHeight:16;segmentsWidth:16" a-webcam="" position="3.431 2.915 0" rotation="-10 0 0" width="4" height="3" scale="1 1 1" visible="true">
+        </a-video>
+        <a-video id="screen-3" material="color:#FFF;shader:standard;side:double;transparent:true;src:#element" geometry="primitive:octahedron;width:4;height:3;segmentsHeight:16;segmentsWidth:16" a-webcam="" position="-2.986 2.915 0" rotation="-10 0 0" width="4" height="3" scale="1 1 1" visible="true">
+        </a-video> 
+    </a-entity>
+<!--       <a-videosphere rotation="0 180 0" src="#element" 
+                     play-on-window-click
+                     play-on-vrdisplayactivate-or-enter-vr>
+      </a-videosphere>
+     -->
+     <!-- CAMERA + CURSOR -->
+    <a-entity camera="userHeight: 1.7" position="0 0 5" rotation="0 0 0" look-controls>
+       <!-- video controls needs <a-cursor> -->
+       <a-cursor id="cursor"  
+                 fuse="true"
+                 fuse-timeout="1000"
+                 position="0 0 -2"
+                 geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.045"  
+                 material="color:  white; shader: flat"
+                
+                 animation__1="property: scale; startEvents: click; from: 1.0 1.0 1.0; to: 0.5 0.5 0.5; dir: normal; dur: 1000; easing: easeInQuint"
+                 animation__2="property: scale; startEvents: mouseleave; from: 0.5 0.5 0.5; to: 1.0 1.0 1.0; dir: normal; dur: 1000; easing: easeOutQuint"
+                 
+                 event-set__1="_event: mouseenter; color: #0f0"
+                event-set__2="_event: mouseleave; color: #fff">
+        </a-cursor>
+    </a-entity>
+    <!-- /CAMERA + CURSOR -->
+    
+   
+  </a-scene>
+
+  <script>
+   
+    var a_scene = document.querySelector('a-scene');
+        
+    if (a_scene.hasLoaded) {
+      run();
+    } 
+    else {
+    	a_scene.addEventListener('loaded', run);
+    }
+    
+    var scene, renderer;
+    
+    function run() {
+      
+   
+      
+    }
+  </script>
+</body>
